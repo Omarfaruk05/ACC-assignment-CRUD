@@ -108,29 +108,30 @@ router.get('/random', (req, res) =>{
 
 router.post('/save', (req, res) => {
     const newUser = req.body;
-    users.push(newUser);
-    res.send(users);
+    const {id, gander, contact, name, address, photoUrl} = newUser;
+    if(gander && name && address && photoUrl && contact){
+        users.push(newUser);
+        res.send(users);
+    }
+    else{
+        res.send({message: 'Please input all the recomended value'})
+    }
+
 });
 
 router.patch('/update', (req, res) =>{
-    const UpdatedInfo = req.body;
-    const {id, gander, contact, name, address, photoUrl} = UpdatedInfo;
-    if(Number(id)){
-        const UpdatedUser = users.find(user => user.id === Number(id));
+    const updatedInfo = req.body;
+    
+    if(Number(updatedInfo.id)){
+        const updatedUser = users.find(user => user.id === Number(updatedInfo.id));
         
-  
-        if(gander && name && address && photoUrl && contact){
-            UpdatedUser.gander = gander;
-            UpdatedUser.name = name;
-            UpdatedUser.address = address;
-            UpdatedUser.contact = contact;
-            UpdatedUser.photoUrl = photoUrl;
-        }
-        else{
-            res.send({message: 'Please input all the recomended value'});
-        }
- 
-    res.send(UpdatedUser)
+        updatedUser.gander = updatedInfo.gander?updatedInfo.gander : updatedUser.gander;
+        updatedUser.name = updatedInfo.name?updatedInfo.name : updatedUser.name;
+        updatedUser.address = updatedInfo.address?updatedInfo.address : updatedUser.address;
+        updatedUser.contact = updatedInfo.contact?updatedInfo.contact : updatedUser.contact;
+        updatedUser.photoUrl = updatedInfo.photoUrl?updatedInfo.photoUrl : updatedUser.photoUrl;
+       
+        res.send(updatedUser)
     }
     else{
         res.send({message: 'Your id must be a number.'})
@@ -141,9 +142,13 @@ router.patch('/update', (req, res) =>{
 
 router.delete('/delete', (req, res) => {
     const {id} = req.body;
-    console.log(id);
+   if(Number(id)){
     const remainUsers = users.filter(user => user.id !== Number(id));
     res.send(remainUsers);
+   }
+   else{
+    res.send({message: 'Please input a valite id.'})
+   }
 });
 
 module.exports = router;
