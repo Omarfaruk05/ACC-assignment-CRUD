@@ -143,7 +143,7 @@ router.patch('/update', (req, res) =>{
         updatedUser.contact = updatedInfo.contact?updatedInfo.contact : updatedUser.contact;
         updatedUser.photoUrl = updatedInfo.photoUrl?updatedInfo.photoUrl : updatedUser.photoUrl;
        
-        res.send(updatedUser)
+        res.send(users)
     }
     else{
         res.send({message: 'Your id must be a number.'})
@@ -153,11 +153,36 @@ router.patch('/update', (req, res) =>{
 });
 
 router.patch('/bulk-update', (req, res) => {
-    const array = req.body;
-    array.map(data => {
-        res.send(data);
-    })
-})
+    try{
+        const multipleUsers = req.body;
+        for(let i = 0; i < multipleUsers.length; i++){
+            const index = users.findIndex((user) => user.id == multipleUsers[i].id);
+            const user = users[index];
+            if(!user){
+                return res.status(400).send({
+                    status: 'Fail',
+                    message: "Can not update users",
+                });
+            }
+            else if(user){
+                for(let property in multipleUsers[i]){
+                    if(user[property]){
+                        user[property] = multipleUsers[i][property]
+                    }
+                }
+            }
+        }
+        res.status(201).send({
+            status: 'Success',
+            data: {user: users},
+        })
+    }catch(error){
+        res.status(400).send({
+            status: 'Fail',
+            message:"Cann't update users",
+        });
+    };
+});
 
 router.delete('/delete', (req, res) => {
     const {id} = req.body;
