@@ -1,95 +1,107 @@
-const express = require('express');;
+const express = require('express');
+const getUsers = require ('../../user.js');
 
-const users = [
-    {
-        id: 1,
-        gander: 'Female',
-        name: 'Farhana',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 2,
-        gander: 'Male',
-        name: 'Omar Faruk',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 3,
-        gander: 'Male',
-        name: 'Md. Omar Faruk',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 4,
-        gander: 'Female',
-        name: 'Kobita',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 5,
-        gander: 'Female',
-        name: 'Chionika',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 6,
-        gander: 'Kale',
-        name: 'Kabir Shing',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 7,
-        gander: 'Male',
-        name: 'Abdullah',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 8,
-        gander: 'Male',
-        name: 'Alif',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 9,
-        gander: 'Male',
-        name: 'Md. Rasel Hassan',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        id: 10,
-        gander: 'Female',
-        name: 'Sabiha',
-        contact: '+8801567900262',
-        address:'Gazipur, Dhaka, Bangladesh',
-        photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
-    },
-    {
-        "id": 11,
-        "gander": "Female",
-        "name": "Kobita Akhter",
-        "contact": "+8801567900262",
-        "address": "Gazipur, Dhaka, Bangladesh",
-        "photoUrl": "https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg"
-    },
-];
+let users;
+
+getUsers((data) =>{
+    users = data;
+},(error)=>{
+    console.log(error);
+}
+)
+
+let users1;
+
+// const users = [
+//     {
+//         id: 1,
+//         gander: 'Female',
+//         name: 'Farhana',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 2,
+//         gander: 'Male',
+//         name: 'Omar Faruk',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 3,
+//         gander: 'Male',
+//         name: 'Md. Omar Faruk',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 4,
+//         gander: 'Female',
+//         name: 'Kobita',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 5,
+//         gander: 'Female',
+//         name: 'Chionika',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 6,
+//         gander: 'Kale',
+//         name: 'Kabir Shing',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 7,
+//         gander: 'Male',
+//         name: 'Abdullah',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 8,
+//         gander: 'Male',
+//         name: 'Alif',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 9,
+//         gander: 'Male',
+//         name: 'Md. Rasel Hassan',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         id: 10,
+//         gander: 'Female',
+//         name: 'Sabiha',
+//         contact: '+8801567900262',
+//         address:'Gazipur, Dhaka, Bangladesh',
+//         photoUrl: 'https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg',
+//     },
+//     {
+//         "id": 11,
+//         "gander": "Female",
+//         "name": "Kobita Akhter",
+//         "contact": "+8801567900262",
+//         "address": "Gazipur, Dhaka, Bangladesh",
+//         "photoUrl": "https://i.ibb.co/ySNYS6g/In-Shot-20220802-210749661.jpg"
+//     },
+// ];
 
 const router = express.Router();
 
@@ -139,6 +151,13 @@ router.patch('/update', (req, res) =>{
     
     
 });
+
+router.patch('/bulk-update', (req, res) => {
+    const array = req.body;
+    array.map(data => {
+        res.send(data);
+    })
+})
 
 router.delete('/delete', (req, res) => {
     const {id} = req.body;
